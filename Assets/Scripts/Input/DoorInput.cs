@@ -16,7 +16,7 @@ public class DoorInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             inputText = inputField.GetComponent<Text>()?.text;
-            if (inputText == "1234")
+            if (inputText == "310")
             {
                 door.gameObject.SetActive(false);
             }
