@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleJournal : MonoBehaviour, Interactibles
+public class PuzzleChalk : MonoBehaviour, Interactibles
 {
     public event Action OpenChalkboard;
 
