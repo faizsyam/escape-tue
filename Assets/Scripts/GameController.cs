@@ -17,10 +17,9 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        puzzlechalk.OpenChalkboard += SolveChalk;
+        puzzlechalk.OpenChalk += SolveChalk;
         exitchalk.EndChalk += StopChalk;
     }
-
     
     void SolveChalk()
     {
@@ -40,7 +39,11 @@ public class GameController : MonoBehaviour
     private void Update()
     {
 
-		if (state == GameState.Chalk)
+        if (state == GameState.FreeRoam)
+        {
+            playerController.HandleUpdate();
+        }
+		else if (state == GameState.Chalk)
         {
             exitchalk.HandleUpdate();
         }

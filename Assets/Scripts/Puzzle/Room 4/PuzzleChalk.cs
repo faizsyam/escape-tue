@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PuzzleChalk : MonoBehaviour, Interactibles
 {
-    public event Action OpenChalkboard;
+    public event Action OpenChalk;
 
     public void Interact()
     {
-        OpenChalkboard();
+        OpenChalk();
     }
 }
