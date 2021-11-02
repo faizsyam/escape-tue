@@ -9044,7 +9044,7 @@ GameObject:
   - component: {fileID: 1161470005}
   - component: {fileID: 1161470004}
   - component: {fileID: 1161470003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9111,9 +9111,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5, y: -0.5}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!212 &1161470006
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9151,8 +9151,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -824216551
-  m_SortingLayer: 2
+  m_SortingLayerID: 1773895725
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -8998185900549712689, guid: 570bebb4ba5e3224a8bfc696c68d3106, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9356,7 +9356,7 @@ GameObject:
   - component: {fileID: 1405490423}
   - component: {fileID: 1405490425}
   - component: {fileID: 1405490424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ExitChalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
