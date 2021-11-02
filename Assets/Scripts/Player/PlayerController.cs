@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
 
+    public event Action HintFound;
     //public event Action OnEncountered;
 
     private bool isMoving;
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
         if (collider != null)
         {
             collider.GetComponent<Interactable>()?.Interact();
+            HintFound();
         }
     }
 
