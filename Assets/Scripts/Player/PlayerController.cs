@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
 
-    //public event Action OnEncountered;
-
     private bool isMoving;
     private int readIn;
     private bool lastIsH;
@@ -112,5 +110,5 @@ public class PlayerController : MonoBehaviour
         else{
             return true; 
         }
-    }
+   } 
 }

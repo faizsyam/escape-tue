@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 using System;
 
-public enum GameState {FreeRoam, Dialog, Journal, ASL, Article, Books, PSV, Manifesto, Aisle, Door}
+public enum GameState {FreeRoam, Dialog, Journal, ASL, Article, Books, PSV, Manifesto, Aisle, Door, Chalk}
 
 public class GameController : MonoBehaviour
 { 
@@ -32,6 +32,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] AisleInput aisleinput;
     [SerializeField] DoorInput doorinput;
+
+    [SerializeField] PuzzleChalk puzzlechalk;
+    [SerializeField] ExitChalk exitchalk;
 
     GameState state;
     // Start is called before the first frame update
@@ -73,7 +76,12 @@ public class GameController : MonoBehaviour
             aisleinput.EnterAisle += StopInputAisle;
             doorinput.FinishRoom += StopInputDoor;
         }
+        else if(SceneManager.GetActiveScene().name == "Room4"){
+            puzzlechalk.OpenChalk += SolveChalk;
+            exitchalk.EndChalk += StopChalk;
+        }
     }
+    
     void StartInputDoor()
     {
         state = GameState.Door;
@@ -184,10 +192,22 @@ public class GameController : MonoBehaviour
         doorinput.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }
+    void SolveChalk()
+    {
+        state = GameState.Chalk;
+        exitchalk.gameObject.SetActive(true);
+        worldCamera.gameObject.SetActive(false);
+    }
+    void StopChalk()
+    {
+        state = GameState.FreeRoam;
+        exitchalk.gameObject.SetActive(false);
+        worldCamera.gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     private void Update()
     {
-        
         if (SceneManager.GetActiveScene().name=="Room1"){
             if (state == GameState.FreeRoam)
             {
@@ -240,5 +260,16 @@ public class GameController : MonoBehaviour
                 doorinput.HandleUpdate();
             }
         }
+        else if (SceneManager.GetActiveScene().name=="Room4"){
+            if (state == GameState.FreeRoam)
+            {
+                playerController.HandleUpdate();
+            }
+            else if (state == GameState.Chalk)
+            {
+                exitchalk.HandleUpdate();
+            }
+        }
     }
 }
+
