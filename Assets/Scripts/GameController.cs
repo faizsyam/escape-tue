@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState {FreeRoam, Chalk, Chair}
+public enum GameState {FreeRoam, Chalk, Chair, Chair2}
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     [SerializeField] ExitChalk exitchalk;
     [SerializeField] PuzzleChair puzzlechair;
     [SerializeField] ExitChair exitchair;
+    [SerializeField] PuzzleChair2 puzzlechair2;
+    [SerializeField] ExitChair2 exitchair2;
     
 
     GameState state;
@@ -24,6 +26,9 @@ public class GameController : MonoBehaviour
 
         puzzlechair.OpenChair += SolveChair;
         exitchair.EndChair += StopChair;
+
+        puzzlechair2.OpenChair2 += SolveChair2;
+        exitchair2.EndChair2 += StopChair2;
     }
     
     void SolveChalk()
@@ -53,6 +58,20 @@ public class GameController : MonoBehaviour
         exitchair.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }
+    
+    void SolveChair2()
+    {
+        state = GameState.Chair2;
+        exitchair2.gameObject.SetActive(true);
+        worldCamera.gameObject.SetActive(false);
+    }
+    
+    void StopChair2()
+    {
+        state = GameState.FreeRoam;
+        exitchair2.gameObject.SetActive(false);
+        worldCamera.gameObject.SetActive(true);
+    }
 
     private void Update()
     {
@@ -69,6 +88,9 @@ public class GameController : MonoBehaviour
         {
             exitchair.HandleUpdate();
         }
-       
+        else if (state == GameState.Chair2)
+        {
+            exitchair2.HandleUpdate();
+        }
     }
 }
