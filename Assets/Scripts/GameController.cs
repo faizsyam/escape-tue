@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
 
@@ -11,6 +12,8 @@ public class GameController : MonoBehaviour
     [SerializeField] DoorInput doorInput;
     [SerializeField] Camera worldCamera;
 
+    public Timecounter tc;
+    bool endGame = false;
     GameState state;
     // Start is called before the first frame update
     void Start()
@@ -28,12 +31,22 @@ public class GameController : MonoBehaviour
 
         findDoor.InputDoor += StartInputDoor;
         doorInput.FinishRoom += StopInputDoor;
+        doorInput.FinishRoomandEnd += StopInputDoorandEnd;
     }
      void StartInputDoor()
     {
-        state = GameState.Door;
-        doorInput.gameObject.SetActive(true);
-        worldCamera.gameObject.SetActive(false);
+        if (!endGame){
+            state = GameState.Door;
+            doorInput.gameObject.SetActive(true);
+            worldCamera.gameObject.SetActive(false);
+        }
+        else{
+            int time = tc.getTime();
+            Debug.Log(time);
+            PlayerPrefs.SetInt("Room1Time", time);
+            PlayerPrefs.SetInt("levelEnded", 1);
+            SceneManager.LoadScene("gameovermenu", LoadSceneMode.Single);
+        }
     }
     void StopInputDoor()
     {
@@ -41,7 +54,13 @@ public class GameController : MonoBehaviour
         doorInput.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }
-
+    void StopInputDoorandEnd()
+    {
+        state = GameState.FreeRoam;
+        doorInput.gameObject.SetActive(false);
+        worldCamera.gameObject.SetActive(true);
+        endGame = true;
+    }
     // Update is called once per frame
     private void Update()
     {

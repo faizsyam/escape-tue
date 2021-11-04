@@ -8,4 +8,8 @@ public class Buttons : MonoBehaviour
     public void play_menu(string sceneName){
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
+
+    public void exit(){
+        Application.Quit();
+    }
 }

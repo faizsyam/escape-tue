@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DoorInput : MonoBehaviour
 {
-    public event Action FinishRoom;
+    public event Action FinishRoom, FinishRoomandEnd;
     public string inputText;
     public GameObject inputField;
     public GameObject door;
@@ -19,6 +19,7 @@ public class DoorInput : MonoBehaviour
             if (inputText == "310")
             {
                 door.gameObject.SetActive(false);
+                FinishRoomandEnd();
             }
 
             FinishRoom();
