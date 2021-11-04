@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     private bool lastIsH;
     private Vector2 input;
 
-//   	public event Action HintFound;
-
     private Animator animator;
 
     private void Awake(){
@@ -57,8 +55,6 @@ public class PlayerController : MonoBehaviour
 		if (collider != null) 
 		{
 			collider.GetComponent<Interactibles>()?.Interact();
-            print("Interaction");
-//			HintFound();
 		}
 	}
 
