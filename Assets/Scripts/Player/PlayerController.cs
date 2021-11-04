@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public LayerMask solidObjectsLayer;
+    public LayerMask interactableLayer;
+
+    //public event Action OnEncountered;
 
     private bool isMoving;
     private int readIn;
@@ -18,7 +22,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update(){
+    public void HandleUpdate(){
         if(!isMoving){
             float getX = Input.GetAxisRaw("Horizontal");
             float getY = Input.GetAxisRaw("Vertical");
@@ -74,6 +78,20 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("isMoving", isMoving);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Interact();
+    }
+
+    void Interact()
+    {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+        if (collider != null)
+        {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
     }
 
     IEnumerator Move(Vector3 targetPos){
@@ -87,7 +105,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool IsWalkable(Vector3 targetPos){
-        if(Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) != null){
+        if(Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) != null){
             return false;
         }
         else{
