@@ -41,10 +41,10 @@ public class PlayerController : MonoBehaviour
 					StartCoroutine(Move(targetPos));
 			}
 		}
-
+        
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Interact();
+            Interact();
 		}
 	}
 
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 		if (collider != null) 
 		{
 			collider.GetComponent<Interactibles>()?.Interact();
+            print("Interaction");
 //			HintFound();
 		}
 	}
